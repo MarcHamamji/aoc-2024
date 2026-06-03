@@ -1,0 +1,52 @@
+fn main() {
+    part1();
+}
+
+fn is_report_valid(values: &Vec<u32>) -> bool {
+    let len = values.len();
+    if len == 1 {
+        return true;
+    }
+
+    let mut old_difference = values[1] as i64 - values[0] as i64;
+    let mut old_distance = old_difference.abs();
+    if (old_distance < 1 || old_distance > 3) {
+        return false;
+    }
+
+    let mut i = 1;
+
+    for i in 1..(len - 1) {
+        let difference = values[i + 1] as i64 - values[i] as i64;
+        if difference.signum() != old_difference.signum() {
+            return false;
+        }
+        let distance = difference.abs();
+        if distance < 1 || distance > 3 {
+            return false;
+        }
+        old_distance = distance;
+        old_difference = difference;
+    }
+
+    true
+}
+
+fn part1() {
+    println!("=== Part 1 ===");
+
+    let input = std::fs::read_to_string("src/bin/day-02/input.txt").expect("Unable to read file");
+
+    let safe_reports = input
+        .trim()
+        .split('\n')
+        .map(|line| {
+            line.split(" ")
+                .map(|v| v.parse::<u32>().expect("Unable to parse number"))
+                .collect::<Vec<u32>>()
+        })
+        .filter(|report| is_report_valid(report))
+        .count();
+
+    println!("Number of safe reports: {safe_reports}");
+}
