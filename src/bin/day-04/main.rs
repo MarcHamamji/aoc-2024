@@ -71,8 +71,6 @@ fn part1() {
 }
 
 fn part2_is_x_mas(grid: &Vec<Vec<char>>, start_row: usize, start_col: usize) -> bool {
-    let mut count = 0;
-
     let height = grid.len();
     let width = grid[0].len();
 

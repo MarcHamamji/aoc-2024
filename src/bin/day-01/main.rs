@@ -59,7 +59,7 @@ fn part2() {
     let mut score = 0;
 
     left_list.iter().for_each(|value| {
-        if let Some(value_score) = map.get(&value) {
+        if let Some(value_score) = map.get(value) {
             score += value_score;
         } else {
             let mut value_score = 0;

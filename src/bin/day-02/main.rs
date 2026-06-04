@@ -11,7 +11,7 @@ fn part1_is_report_valid(values: &Vec<u32>) -> bool {
 
     let difference = values[1] as i64 - values[0] as i64;
     let distance = difference.abs();
-    if distance < 1 || distance > 3 {
+    if !(1..=3).contains(&distance) {
         return false;
     }
 
@@ -23,7 +23,7 @@ fn part1_is_report_valid(values: &Vec<u32>) -> bool {
             return false;
         }
         let distance = difference.abs();
-        if distance < 1 || distance > 3 {
+        if !(1..=3).contains(&distance) {
             return false;
         }
         old_sign = difference.signum();
@@ -45,7 +45,7 @@ fn part1() {
                 .map(|v| v.parse::<u32>().expect("Unable to parse number"))
                 .collect::<Vec<u32>>()
         })
-        .filter(|report| part1_is_report_valid(report))
+        .filter(part1_is_report_valid)
         .count();
 
     println!("Number of safe reports: {safe_reports}");
@@ -69,7 +69,7 @@ fn part2_is_report_valid(values: &Vec<u32>) -> bool {
         }
     }
 
-    return false;
+    false
 }
 
 fn part2() {
@@ -85,7 +85,7 @@ fn part2() {
                 .map(|v| v.parse::<u32>().expect("Unable to parse number"))
                 .collect::<Vec<u32>>()
         })
-        .filter(|report| part2_is_report_valid(report))
+        .filter(part2_is_report_valid)
         .count();
 
     println!("Number of safe reports: {safe_reports}");
