@@ -3,7 +3,7 @@ fn main() {
     part2();
 }
 
-fn part1_count_xmases(grid: &Vec<Vec<char>>, start_row: usize, start_col: usize) -> i32 {
+fn part1_count_xmases(grid: &[Vec<char>], start_row: usize, start_col: usize) -> i32 {
     let mut count = 0;
 
     let height = grid.len();
@@ -70,7 +70,7 @@ fn part1() {
     println!("Number of XMASes: {}", count);
 }
 
-fn part2_is_x_mas(grid: &Vec<Vec<char>>, start_row: usize, start_col: usize) -> bool {
+fn part2_is_x_mas(grid: &[Vec<char>], start_row: usize, start_col: usize) -> bool {
     let height = grid.len();
     let width = grid[0].len();
 

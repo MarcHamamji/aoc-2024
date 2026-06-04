@@ -3,7 +3,7 @@ fn main() {
     part2();
 }
 
-fn part1_is_report_valid(values: &Vec<u32>) -> bool {
+fn part1_is_report_valid(values: &[u32]) -> bool {
     let len = values.len();
     if len == 1 {
         return true;
@@ -45,13 +45,13 @@ fn part1() {
                 .map(|v| v.parse::<u32>().expect("Unable to parse number"))
                 .collect::<Vec<u32>>()
         })
-        .filter(part1_is_report_valid)
+        .filter(|v| part1_is_report_valid(v))
         .count();
 
     println!("Number of safe reports: {safe_reports}");
 }
 
-fn part2_is_report_valid(values: &Vec<u32>) -> bool {
+fn part2_is_report_valid(values: &[u32]) -> bool {
     let len = values.len();
     if len == 1 {
         return true;
@@ -62,7 +62,7 @@ fn part2_is_report_valid(values: &Vec<u32>) -> bool {
     }
 
     for i in 0..len {
-        let mut new_values = values.clone();
+        let mut new_values = values.to_vec();
         new_values.remove(i);
         if part1_is_report_valid(&new_values) {
             return true;
@@ -85,7 +85,7 @@ fn part2() {
                 .map(|v| v.parse::<u32>().expect("Unable to parse number"))
                 .collect::<Vec<u32>>()
         })
-        .filter(part2_is_report_valid)
+        .filter(|v| part2_is_report_valid(v))
         .count();
 
     println!("Number of safe reports: {safe_reports}");
